@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usman ❤️ Malaika</title>
+
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#8b0000,#ff4d6d);
+  color:white;
+  text-align:center;
+  overflow:hidden;
+  height:100vh;
+}
+
+/* Main Box */
+#box {
+  background: rgba(0,0,0,0.5);
+  padding:20px;
+  border-radius:20px;
+  width:90%;
+  max-width:400px;
+  margin:auto;
+  margin-top:60px;
+  box-shadow:0 0 20px black;
+}
+
+h1 {
+  font-size:28px;
+  color:#ffb6c1;
+  text-shadow:0 0 10px red;
+}
+
+p {font-size:18px;}
+
+button {
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  margin:10px;
+}
+
+#yes {background:red;color:white;}
+#no {background:white;color:red;position:absolute;}
+
+/* Falling Roses & Hearts */
+.fall {
+  position:fixed;
+  top:-50px;
+  font-size:25px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {transform: translateY(-50px); opacity:1;}
+  100% {transform: translateY(110vh); opacity:0;}
+}
+
+/* Typing text */
+#msg {
+  font-size:18px;
+  margin-top:15px;
+  color:#fffacd;
+}
+</style>
+</head>
+
+<body>
+
+<div id="box">
+<h1>🌹 Usman ❤️ Malaika 🌹</h1>
+<p id="question">Will you be my Valentine forever? 💖</p>
+
+<button id="yes" onclick="playSong(); typeLove()">YES 😍</button>
+<button id="no" onmouseover="moveNo()">NO 😜</button>
+
+<p id="msg"></p>
+</div>
+
+<!-- Hidden YouTube Player -->
+<div id="player" style="display:none;"></div>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+/* YouTube Player */
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('player', {
+    height: '0',
+    width: '0',
+    videoId: 'GfhbqXJwNes', 
+    playerVars: { autoplay:0, loop:1, playlist:'GfhbqXJwNes' }
+  });
+}
+function playSong() {
+  player.playVideo();
+}
+
+/* Love Message Typing */
+const loveText = "Meri pyari Malaika 💕\nTum meri zindagi ho.\nMain tumse bohot mohabbat karta hoon.\nHamesha meri rahogi ❤️ — Usman";
+let i=0;
+function typeLove(){
+  if(i < loveText.length){
+    document.getElementById("msg").innerHTML += loveText[i] == "\n" ? "<br>" : loveText[i];
+    i++;
+    setTimeout(typeLove,50);
+  }
+}
+
+/* Moving NO Button */
+function moveNo(){
+  let x = Math.random()*200 - 100;
+  let y = Math.random()*100 - 50;
+  document.getElementById("no").style.transform = `translate(${x}px,${y}px)`;
+}
+
+/* Falling Roses & Hearts */
+setInterval(()=>{
+  let el = document.createElement("div");
+  el.className="fall";
+  el.innerHTML = Math.random()>0.5 ? "🌹" : "❤️";
+  el.style.left = Math.random()*100+"vw";
+  el.style.animationDuration = (3 + Math.random()*5)+"s";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),7000);
+},300);
+</script>
+
+</body>
+</html>
